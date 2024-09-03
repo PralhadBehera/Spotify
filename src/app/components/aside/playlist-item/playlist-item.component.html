@@ -1,0 +1,47 @@
+<li>
+  <a
+    routerLink="/playlist/{{ playlistItem.id }}"
+    class="playlist-item flex flex-row gap-2 relative p-2 overflow-hidden items-center rounded-md hover:bg-zinc-800 justify-start"
+  >
+    <section class="size-12">
+      <picture class="border-blue-500 border-solid">
+        <img
+          [src]="playlistItem.cover"
+          alt="Cover of {{ playlistItem.title }} by {{ getArtists() }}"
+          [class]="{
+          'object-cover': true,
+          'aspect-square': true,
+          'w-full': true,
+          'h-auto': true,
+          'rounded-md': true,
+          'border-0': !isPlaylistPlaying,
+          'border-[1px]': isPlaylistPlaying,
+          'border-green-400': true
+          }"
+        />
+      </picture>
+    </section>
+
+
+    <section class="h-12 flex flex-auto flex-col truncate hidden lg:block">
+      <h4 [class]="{
+      'text-sm': true,
+      'text-white': !isPlaylistSelectedToPlay,
+       'text-green-500': isPlaylistSelectedToPlay}"
+      >
+        {{ playlistItem.title }}
+      </h4>
+
+      <span class="text-xs text-gray-400 hidden lg:inline">
+      {{ getArtists() }}
+    </span>
+    </section>
+
+    <section class="h-12">
+      @if (isPlaylistPlaying) {
+        <equalizer/>
+      }
+    </section>
+
+  </a>
+</li>

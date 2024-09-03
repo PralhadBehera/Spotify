@@ -1,0 +1,23 @@
+<div
+  class="flex items-center gap-5 relative overflow-hidden p-2">
+  @if(song){
+    <picture
+      [routerLink]="['/playlist', song.albumId]"
+      class="size-8 bg-zinc-800 rounded-md shadow-lg overflow-hidden hover:cursor-pointer lg:size-16"
+    >
+      <img [src]="song.image" [alt]="song.title" class="w-full h-auto object-cover"/>
+    </picture>
+
+    <div class="flex flex-col">
+      <h3
+        [routerLink]="['/playlist', song.albumId]"
+        class="font-semibold text-sm block hover:cursor-pointer"
+      >
+        {{ song.title }}
+      </h3>
+      <span class="text-xs opacity-80">
+      {{ getArtists() }}
+    </span>
+    </div>
+  }
+</div>

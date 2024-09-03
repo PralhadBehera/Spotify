@@ -1,0 +1,54 @@
+<table class="text-xs table-auto text-left min-w-full divide-y divide-gray-500/20">
+  <thead class="">
+  <tr class="text-zinc-400 lg:text-sm">
+    <th class="px-4 py-2 font-light">#</th>
+    <th class="px-4 py-2 font-light">Title</th>
+    <th class="px-4 py-2 font-light hidden md:table-cell">Album</th>
+    <th class="px-4 py-2 font-light">
+      <icon-time/>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr class="h-[16px]"></tr>
+
+    @for (song of songs; track song.id; let index = $index) {
+      <tr
+        class="text-gray-300 border-spacing-0 text-xs font-light hover:bg-white/10 overflow-hidden transition duration-300 group">
+        <td class="px-4 py-2 rounded-tl-lg rounded-bl-lg w-5">
+          <div class="flex flex-row justify-center items-center size-10">
+            <div
+              class="size-10 group-hover:hidden flex flex-row justify-center items-center">
+              <playlist-details-musictable-index
+                [index]="index"
+                [song]="song"
+              />
+            </div>
+            <div
+              class="hidden group-hover:block flex flex-row justify-center items-center">
+              <playlist-details-musictable-play-button
+                [song]="song"
+              />
+            </div>
+
+          </div>
+
+        </td>
+        <td class="px-4 py-2 flex flex-row gap-3">
+          <picture class="size-11">
+            <img
+              [src]="song.image"
+              alt="{{song.title}}"
+              class="w-full h-auto object-cover"
+            />
+          </picture>
+          <playlist-details-musictable-songtitle [song]="song"/>
+        </td>
+        <td class="px-4 py-2 hidden md:table-cell">{{ song.album }}</td>
+        <td class="px-4 py-2 rounded-tr-lg rounded-br-lg">{{ song.duration }}</td>
+      </tr>
+    }
+
+  </tbody>
+</table>

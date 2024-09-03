@@ -1,0 +1,64 @@
+<article class="flex flex-col p-5 gap-5 gap-y-8">
+  <section class="search-input">
+    <div
+      class="
+      search-input-container
+      p-1 px-4
+      flex flex-row flex-nowrap items-center gap-2
+      border border-1 border-solid border-gray-500
+      text-white bg-zinc-800 rounded-full
+      max-w-lg
+      focus:border-white focus:border-2"
+    >
+      <icon-search width="16"/>
+      <input
+        type="search"
+        class="
+        bg-zinc-800
+        outline-none
+        w-full"
+        placeholder="what do you like to listen?"
+        value="{{results.searchString}}"
+        (input)="onSearchInput($event)"
+      >
+    </div>
+  </section>
+
+  @if (hasInputMinCharacters()) {
+    <section class="search-results-playlists">
+      <h2 class="text-white">Playlist Results</h2>
+      <div class="flex flex-wrap mt-6 gap-4 justify-center xl:justify-start">
+        @if (isSearching) {
+          <loading-playlist-card/>
+        }
+
+        @for (playlist of results.playlists; track playlist.id) {
+          <playlist-card [playlist]="playlist"/>
+        }
+      </div>
+
+
+      @if (hasNotPlaylistFound()) {
+        <div class="flex flex-nowrap gap-3 justify-center">
+          <span>No playlists found</span>
+        </div>
+      }
+    </section>
+  }
+
+
+  @if (hasInputMinCharacters()) {
+    <section class="search-results-songs">
+      <h2 class="text-white">Song Results</h2>
+      @if (hasSongsFound()) {
+        <playlist-details-musictable [songs]="results.songs"/>
+      } @else {
+        <div class="flex flex-nowrap gap-3 justify-center">
+          <span>No songs found</span>
+
+        </div>
+      }
+    </section>
+  }
+
+</article>
